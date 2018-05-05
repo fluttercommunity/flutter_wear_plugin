@@ -6,17 +6,9 @@ A collection of widgets for developing Wear OS (Android Wear) apps in Flutter.
 
 There currently three widgets provided by the plugin:
 
-## WatchShape
-
-Determines whether the watch is square or round.
-
-## InheritedShape
-
-An InheritedWidget that can be used to pass the shape of the watch down the widget tree.
-
-## AmbientMode
-
-A builder that provides what mode the watch is in. The widget will rebuild whenever the watch changes mode.
+* WatchShape: determines whether the watch is square or round.
+* InheritedShape: an InheritedWidget that can be used to pass the shape of the watch down the widget tree.
+* AmbientMode: builder that provides what mode the watch is in. The widget will rebuild whenever the watch changes mode.
 
 ## Example
 
