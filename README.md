@@ -1,6 +1,6 @@
 # Wear
 
-A collection of widgets for developing Wear OS (Android Wear) apps.
+A collection of widgets for developing Wear OS (Android Wear) apps in Flutter.
 
 # Widgets
 
