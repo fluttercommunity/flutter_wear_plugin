@@ -5,12 +5,14 @@ author: Matt Sullivan <matt.j.sullivan@gmail.com>
 homepage: https://github.com/mjohnsullivan/flutter_wear_plugin
 
 environment:
-  sdk: ">=2.0.0"
+  sdk: ">1.25.0 <2.1.0"
   flutter: "^0.3.1"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  meta: ^1.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

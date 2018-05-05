@@ -34,3 +34,40 @@ class WatchScreen extends StatelessWidget {
           )));
 }
 ```
+
+# Requirements
+
+## Manifest File
+
+Add the following to your AndroidManifest.xml file:
+
+```xml
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-feature android:name="android.hardware.type.watch" />
+
+<application>
+<meta-data
+    android:name="com.google.android.wearable.standalone"
+    android:value="true" />
+</application>
+```
+
+## Update Android's MainActivity
+
+The ambient mode widget needs some initialization in Android's MainActivity code. Update your code as follows:
+
+```kotlin
+class MainActivity: FlutterActivity(), AmbientMode.AmbientCallbackProvider {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    GeneratedPluginRegistrant.registerWith(this)
+
+    // Wire up the activity for ambient callbacks
+    AmbientMode.attachAmbientSupport(this)
+  }
+
+  override fun getAmbientCallback(): AmbientMode.AmbientCallback {
+    return FlutterAmbientCallback(getChannel(flutterView))
+  }
+}
+```
