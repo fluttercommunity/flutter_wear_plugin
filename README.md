@@ -1,4 +1,4 @@
-# Wear
+# Flutter Wear Plugin
 
 A collection of widgets for developing Wear OS (Android Wear) apps in Flutter.
 
@@ -34,9 +34,13 @@ class WatchScreen extends StatelessWidget {
 Add the following to your AndroidManifest.xml file:
 
 ```xml
+<!-- Required for ambient mode support -->
 <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+<!-- Flags the app as a Wear app -->
 <uses-feature android:name="android.hardware.type.watch" />
 
+<!-- Flags that the app doesn't require a companion phone app -->
 <application>
 <meta-data
     android:name="com.google.android.wearable.standalone"
