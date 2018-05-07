@@ -31,7 +31,13 @@ class WatchScreen extends StatelessWidget {
 
 ## App Gradle File
 
-Add the following dependencies to the Android Gradle file for the app:
+Change the min SDK version to API 23:
+
+```
+minSdkVersion 23
+```
+
+Then, add the following dependencies to the Android Gradle file for the app:
 
 ```
 dependencies {
