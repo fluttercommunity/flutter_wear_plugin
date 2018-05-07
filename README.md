@@ -29,6 +29,19 @@ class WatchScreen extends StatelessWidget {
 
 # Requirements
 
+## App Gradle File
+
+Add the following dependencies to the Android Gradle file for the app:
+
+```
+dependencies {
+    // Wear libraries
+    implementation 'com.android.support:wear:27.1.1'
+    implementation 'com.google.android.support:wearable:2.3.0'
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
+}
+```
+
 ## Manifest File
 
 Add the following to your AndroidManifest.xml file:
