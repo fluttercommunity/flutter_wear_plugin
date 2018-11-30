@@ -1,6 +1,6 @@
 name: wear
 description: A plugin that offers widgets for Wear OS by Google
-version: 0.0.2
+version: 0.0.3
 author: Matt Sullivan <matt.j.sullivan@gmail.com>
 homepage: https://github.com/mjohnsullivan/flutter_wear_plugin
 
