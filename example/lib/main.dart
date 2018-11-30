@@ -8,25 +8,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Wear example app'),
-        ),
-        body: new Center(
-          child: new WatchShape(
-              builder: (context, shape) => Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Shape: ${shape == Shape.round ? 'round' : 'square'}',
-                        ),
-                        AmbientMode(
-                            builder: (context, mode) => new Text(
-                                  'Mode: ${mode == Mode.active ? "Active" : "Ambient"}',
-                                )),
-                      ],
-                    ),
+        body: Center(
+          child: WatchShape(
+              builder: (context, shape) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Shape: ${shape == Shape.round ? 'round' : 'square'}',
+                      ),
+                      AmbientMode(
+                          builder: (context, mode) => Text(
+                                'Mode: ${mode == Mode.active ? 'Active' : 'Ambient'}',
+                              )),
+                    ],
                   )),
         ),
       ),
