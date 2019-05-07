@@ -10,11 +10,11 @@ import io.flutter.view.FlutterView
 import android.app.Activity
 import android.os.Bundle
 
-import android.support.v4.view.ViewCompat.requestApplyInsets
-import android.support.v4.view.ViewCompat.setOnApplyWindowInsetsListener
-import android.support.v4.view.WindowInsetsCompat
+import androidx.core.view.ViewCompat.requestApplyInsets
+import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
+import androidx.core.view.WindowInsetsCompat
 
-import android.support.wear.ambient.AmbientMode
+import androidx.wear.ambient.AmbientMode
 
 private const val CHANNEL_NAME = "wear"
 
