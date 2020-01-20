@@ -5,7 +5,7 @@ import android.os.Bundle
 import io.flutter.app.FlutterActivity
 import io.flutter.plugins.GeneratedPluginRegistrant
 
-import android.support.wear.ambient.AmbientMode
+import androidx.wear.ambient.AmbientMode
 
 import com.mjohnsullivan.flutterwear.wear.FlutterAmbientCallback
 import com.mjohnsullivan.flutterwear.wear.getChannel
