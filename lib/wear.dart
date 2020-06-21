@@ -29,7 +29,7 @@ class InheritedShape extends InheritedWidget {
   final Shape shape;
 
   static InheritedShape of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(InheritedShape);
+    return context.dependOnInheritedWidgetOfExactType<InheritedShape>();
   }
 
   @override
@@ -115,7 +115,7 @@ class _AmbientModeState extends State<AmbientMode> {
   initState() {
     super.initState();
 
-    _channel.setMethodCallHandler((call) {
+    _channel.setMethodCallHandler((call) async {
       switch (call.method) {
         case 'enter':
           setState(() => ambientMode = Mode.ambient);
