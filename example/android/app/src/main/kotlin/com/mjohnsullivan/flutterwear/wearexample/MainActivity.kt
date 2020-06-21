@@ -1,25 +1,20 @@
 package com.mjohnsullivan.flutterwear.wearexample
 
-import android.os.Bundle
-
-import io.flutter.app.FlutterActivity
-import io.flutter.plugins.GeneratedPluginRegistrant
-
-import androidx.wear.ambient.AmbientMode
+import androidx.wear.ambient.AmbientModeSupport
 
 import com.mjohnsullivan.flutterwear.wear.FlutterAmbientCallback
 import com.mjohnsullivan.flutterwear.wear.getChannel
 
-class MainActivity: FlutterActivity(), AmbientMode.AmbientCallbackProvider {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    GeneratedPluginRegistrant.registerWith(this)
+import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugins.GeneratedPluginRegistrant
 
-    // Wire up the activity for ambient callbacks
-    AmbientMode.attachAmbientSupport(this)
-  }
+class MainActivity : FlutterFragmentActivity(), AmbientModeSupport.AmbientCallbackProvider {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine)
+    }
 
-  override fun getAmbientCallback(): AmbientMode.AmbientCallback {
-    return FlutterAmbientCallback(getChannel(flutterView))
-  }
+    override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {
+        return FlutterAmbientCallback(getChannel(flutterEngine))
+    }
 }

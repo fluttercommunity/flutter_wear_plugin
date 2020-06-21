@@ -6,7 +6,7 @@ homepage: https://github.com/mjohnsullivan/flutter_wear_plugin
 
 environment:
   sdk:  ">=2.0.0-dev.68.0 <3.0.0"
-  flutter: ">=0.11.12 <2.0.0"
+  flutter: ">=1.12.0 <2.0.0"
 
 dependencies:
   flutter:
@@ -16,5 +16,7 @@ dependencies:
 
 flutter:
   plugin:
-    androidPackage: com.mjohnsullivan.flutterwear.wear
-    pluginClass: WearPlugin
+    platforms:
+      android:
+        package: com.mjohnsullivan.flutterwear.wear
+        pluginClass: WearPlugin

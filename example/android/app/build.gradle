@@ -54,7 +54,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Wear libraries
-    implementation 'com.android.support:wear:27.1.1'
-    implementation 'com.google.android.support:wearable:2.3.0'
-    compileOnly 'com.google.android.wearable:wearable:2.3.0'
+    implementation 'androidx.wear:wear:1.0.0'
+    implementation 'com.google.android.support:wearable:2.7.0'
+    compileOnly 'com.google.android.wearable:wearable:2.7.0'
 }
