@@ -42,9 +42,9 @@ Then, add the following dependencies to the Android Gradle file for the app:
 ```
 dependencies {
     // Wear libraries
-    implementation 'com.android.support:wear:27.1.1'
-    implementation 'com.google.android.support:wearable:2.3.0'
-    compileOnly 'com.google.android.wearable:wearable:2.3.0'
+    implementation 'androidx.wear:wear:1.0.0'
+    implementation 'com.google.android.support:wearable:2.7.0'
+    compileOnly 'com.google.android.wearable:wearable:2.7.0'
 }
 ```
 
@@ -61,28 +61,24 @@ Add the following to your AndroidManifest.xml file:
 
 <!-- Flags that the app doesn't require a companion phone app -->
 <application>
-<meta-data
-    android:name="com.google.android.wearable.standalone"
-    android:value="true" />
+    <meta-data
+        android:name="com.google.android.wearable.standalone"
+        android:value="true" />
 </application>
 ```
 
 ## Update Android's MainActivity
 
-The ambient mode widget needs some initialization in Android's MainActivity code. Update your code as follows:
+The ambient mode widget needs some initialization in Android's MainActivity code, and MainActivity needs to extend `FlutterFragmentActivity`. Update your code as follows:
 
 ```kotlin
-class MainActivity: FlutterActivity(), AmbientMode.AmbientCallbackProvider {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    GeneratedPluginRegistrant.registerWith(this)
+class MainActivity : FlutterFragmentActivity(), AmbientModeSupport.AmbientCallbackProvider {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine)
+    }
 
-    // Wire up the activity for ambient callbacks
-    AmbientMode.attachAmbientSupport(this)
-  }
-
-  override fun getAmbientCallback(): AmbientMode.AmbientCallback {
-    return FlutterAmbientCallback(getChannel(flutterView))
-  }
+    override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {
+        return FlutterAmbientCallback(getChannel(flutterEngine))
+    }
 }
 ```
