@@ -1,8 +1,11 @@
 .DS_Store
 .dart_tool/
-
-.packages
+.idea/
 .pub/
+.vscode/
+build/
+.packages
 pubspec.lock
 
-build/
+# iOS not required for this plugin
+ios/**

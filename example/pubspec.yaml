@@ -1,7 +1,13 @@
 name: wear_example
 description: Demonstrates how to use the wear plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  wear:
+    path: ../
   flutter:
     sdk: flutter
 
@@ -9,5 +15,5 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  wear:
-    path: ../
+flutter:
+  uses-material-design: true

@@ -10,18 +10,25 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: WatchShape(
-              builder: (context, shape) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Shape: ${shape == Shape.round ? 'round' : 'square'}',
-                      ),
-                      AmbientMode(
-                          builder: (context, mode) => Text(
-                                'Mode: ${mode == Mode.active ? 'Active' : 'Ambient'}',
-                              )),
-                    ],
-                  )),
+            builder: (context, shape, child) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Shape: ${shape == WearShape.round ? 'round' : 'square'}',
+                  ),
+                  child,
+                ],
+              );
+            },
+            child: AmbientMode(
+              builder: (context, mode, child) {
+                return Text(
+                  'Mode: ${mode == WearMode.active ? 'Active' : 'Ambient'}',
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
