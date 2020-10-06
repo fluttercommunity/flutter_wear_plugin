@@ -1,6 +1,6 @@
 name: wear
 description: A plugin that offers Flutter support for Wear OS by Google
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/fluttercommunity/flutter_wear_plugin
 
 environment:

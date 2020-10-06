@@ -1,3 +1,7 @@
+# 0.1.1
+
+- Fix Kotlin/Android compileOnly dep on com.google.android.wearable:wearable.
+
 # 0.1.0
 
 - Updated to AndroidX and Android embedding v2.
