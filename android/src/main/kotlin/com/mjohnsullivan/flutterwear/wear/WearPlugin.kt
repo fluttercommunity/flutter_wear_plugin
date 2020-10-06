@@ -16,9 +16,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
 
-private const val CHANNEL_NAME = "wear"
-
-class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObserver, WearableActivityController.AmbientCallback() {
+class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObserver {
+    private var mAmbientCallback = WearableAmbientCallback()
     private var mMethodChannel: MethodChannel? = null
     private var mActivityBinding: ActivityPluginBinding? = null
     private var mAmbientController: WearableActivityController? = null
@@ -26,11 +25,11 @@ class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObs
     companion object {
         const val TAG = "WearPlugin"
         const val BURN_IN_PROTECTION = WearableActivityController.EXTRA_BURN_IN_PROTECTION
-        const val LOWBIT_AMBIENT = WearableActivityController.EXTRA_LOWBIT_AMBIENT
+        const val LOW_BIT_AMBIENT = WearableActivityController.EXTRA_LOWBIT_AMBIENT
     }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        mMethodChannel = MethodChannel(binding.binaryMessenger, CHANNEL_NAME)
+        mMethodChannel = MethodChannel(binding.binaryMessenger, "wear")
         mMethodChannel!!.setMethodCallHandler(this)
     }
 
@@ -57,8 +56,8 @@ class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObs
 
     private fun attachAmbientController(binding: ActivityPluginBinding) {
         mActivityBinding = binding
-        mAmbientController = WearableActivityController(TAG, binding.activity, this)
-        mAmbientController?.setAmbientEnabled();
+        mAmbientController = WearableActivityController(TAG, binding.activity, mAmbientCallback)
+        mAmbientController?.setAmbientEnabled()
         val reference = (binding.lifecycle as HiddenLifecycleReference)
         reference.lifecycle.addObserver(this)
     }
@@ -113,27 +112,6 @@ class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObs
         }
     }
 
-    override fun onEnterAmbient(ambientDetails: Bundle) {
-        val burnInProtection = ambientDetails.getBoolean(BURN_IN_PROTECTION, false)
-        val lowBitAmbient = ambientDetails.getBoolean(LOWBIT_AMBIENT, false)
-        mMethodChannel?.invokeMethod("onEnterAmbient", mapOf(
-                "burnInProtection" to burnInProtection,
-                "lowBitAmbient" to lowBitAmbient
-        ))
-    }
-
-    override fun onExitAmbient() {
-        mMethodChannel?.invokeMethod("onExitAmbient", null)
-    }
-
-    override fun onUpdateAmbient() {
-        mMethodChannel?.invokeMethod("onUpdateAmbient", null)
-    }
-
-    override fun onInvalidateAmbientOffload() {
-        mMethodChannel?.invokeMethod("onInvalidateAmbientOffload", null)
-    }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         mAmbientController?.onCreate()
@@ -159,4 +137,26 @@ class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObs
         mAmbientController?.onDestroy()
     }
 
+    inner class WearableAmbientCallback : WearableActivityController.AmbientCallback() {
+        override fun onEnterAmbient(ambientDetails: Bundle) {
+            val burnInProtection = ambientDetails.getBoolean(BURN_IN_PROTECTION, false)
+            val lowBitAmbient = ambientDetails.getBoolean(LOW_BIT_AMBIENT, false)
+            mMethodChannel?.invokeMethod("onEnterAmbient", mapOf(
+                    "burnInProtection" to burnInProtection,
+                    "lowBitAmbient" to lowBitAmbient
+            ))
+        }
+
+        override fun onExitAmbient() {
+            mMethodChannel?.invokeMethod("onExitAmbient", null)
+        }
+
+        override fun onUpdateAmbient() {
+            mMethodChannel?.invokeMethod("onUpdateAmbient", null)
+        }
+
+        override fun onInvalidateAmbientOffload() {
+            mMethodChannel?.invokeMethod("onInvalidateAmbientOffload", null)
+        }
+    }
 }

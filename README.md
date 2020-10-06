@@ -2,7 +2,7 @@
 
 A plugin that offers Flutter support for Wear OS by Google (Android Wear).
 
-_Adding this plugin will set your `minSdkVersion` to `23`._
+__To use this plugin you must set your `minSdkVersion` to `23`.__
 
 
 # Widgets
