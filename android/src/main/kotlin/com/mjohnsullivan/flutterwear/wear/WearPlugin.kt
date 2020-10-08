@@ -74,12 +74,12 @@ class WearPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, LifecycleObs
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "getShape" -> {
-                val view = mActivityBinding?.activity?.window?.decorView
+                val activity = mActivityBinding?.activity
                 when {
-                    view == null -> {
-                        result.error("no-view", "No android view available.", null)
+                    activity == null -> {
+                        result.error("no-activity", "No android activity available.", null)
                     }
-                    getRootWindowInsets(view)?.isRound == true -> {
+                    activity.resources.configuration.isScreenRound -> {
                         result.success("round")
                     }
                     else -> {
