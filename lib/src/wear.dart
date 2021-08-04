@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show debugPrint;
-import 'package:flutter/services.dart' show MethodChannel, MethodCall, PlatformException;
+import 'package:flutter/services.dart'
+    show MethodChannel, MethodCall, PlatformException;
 
 class Wear {
   static const MethodChannel _channel = MethodChannel('wear');
@@ -28,7 +29,8 @@ class Wear {
     switch (call.method) {
       case 'onEnterAmbient':
         final args = (call.arguments as Map).cast<String, bool>();
-        final details = AmbientDetails(args['burnInProtection']!, args['lowBitAmbient']!);
+        final details =
+            AmbientDetails(args['burnInProtection']!, args['lowBitAmbient']!);
         _notifyAmbientCallbacks((callback) => callback.onEnterAmbient(details));
         break;
       case 'onExitAmbient':
@@ -38,7 +40,8 @@ class Wear {
         _notifyAmbientCallbacks((callback) => callback.onUpdateAmbient());
         break;
       case 'onInvalidateAmbientOffload':
-        _notifyAmbientCallbacks((callback) => callback.onInvalidateAmbientOffload());
+        _notifyAmbientCallbacks(
+            (callback) => callback.onInvalidateAmbientOffload());
         break;
     }
   }

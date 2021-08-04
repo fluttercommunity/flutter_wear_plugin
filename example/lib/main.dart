@@ -10,10 +10,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: WatchShape(
-            builder: (
-              context,
-              shape,
-            ) {
+            builder: (context, shape) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

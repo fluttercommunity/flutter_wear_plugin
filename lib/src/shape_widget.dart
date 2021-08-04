@@ -14,7 +14,7 @@ class WatchShape extends StatefulWidget {
   const WatchShape({
     Key? key,
     required this.builder,
-  })  : super(key: key);
+  }) : super(key: key);
 
   final WatchShapeBuilder builder;
 
@@ -39,7 +39,8 @@ class _WatchShapeState extends State<WatchShape> {
     super.initState();
     Wear.instance.getShape().then((String shape) {
       if (mounted) {
-        setState(() => _shape = (shape == 'round' ? WearShape.round : WearShape.square));
+        setState(() =>
+            _shape = (shape == 'round' ? WearShape.round : WearShape.square));
       }
     });
   }
@@ -59,13 +60,14 @@ class _WatchShapeState extends State<WatchShape> {
 }
 
 /// An inherited widget that holds the shape of the Watch
-@Deprecated("Add WatchShape instead and use WatchShape.of(context) to get the shape value.")
+@Deprecated(
+    "Add WatchShape instead and use WatchShape.of(context) to get the shape value.")
 class InheritedShape extends InheritedWidget {
   const InheritedShape({
     Key? key,
     required this.shape,
     required Widget child,
-  })  : super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final WearShape shape;
 

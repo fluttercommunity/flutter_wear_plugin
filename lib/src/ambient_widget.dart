@@ -16,7 +16,7 @@ class AmbientMode extends StatefulWidget {
     Key? key,
     required this.builder,
     this.onUpdate,
-  })  : super(key: key);
+  }) : super(key: key);
 
   final AmbientModeWidgetBuilder builder;
 
@@ -25,12 +25,16 @@ class AmbientMode extends StatefulWidget {
 
   /// Get current [WearMode].
   static WearMode? wearModeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()?.mode;
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()
+        ?.mode;
   }
 
   /// Get current [AmbientDetails].
   static AmbientDetails? ambientDetailsOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()?.details;
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()
+        ?.details;
   }
 
   @override
@@ -69,7 +73,8 @@ class _AmbientModeState extends State<AmbientMode> with AmbientCallback {
 
   void _updateMode(bool isAmbient) {
     if (mounted) {
-      setState(() => _ambientMode = isAmbient ? WearMode.ambient : WearMode.active);
+      setState(
+          () => _ambientMode = isAmbient ? WearMode.ambient : WearMode.active);
     }
   }
 
@@ -92,7 +97,7 @@ class _InheritedAmbientMode extends InheritedWidget {
     required this.mode,
     required this.details,
     required Widget child,
-  })  : super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final WearMode mode;
   final AmbientDetails details;
