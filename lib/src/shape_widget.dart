@@ -6,25 +6,23 @@ import 'package:wear/src/wear.dart';
 enum WearShape { square, round }
 
 /// Builds a child for a [WatchShape]
-typedef Widget WatchShapeBuilder(BuildContext context, WearShape shape, Widget child);
+typedef Widget WatchShapeBuilder(BuildContext context, WearShape shape);
 
 /// Builder widget for watch shapes
 @immutable
 class WatchShape extends StatefulWidget {
   const WatchShape({
-    Key key,
-    this.builder,
-    this.child,
+    Key? key,
+    required this.builder,
   })  : super(key: key);
 
   final WatchShapeBuilder builder;
-  final Widget child;
 
   /// Call [WatchShape.of(context)] to retrieve the shape further down
   /// in the widget hierarchy.
-  static WearShape of(BuildContext context) {
+  static WearShape? of(BuildContext context) {
     // ignore: deprecated_member_use_from_same_package
-    return InheritedShape.of(context).shape;
+    return InheritedShape.of(context)?.shape;
   }
 
   @override
@@ -32,14 +30,13 @@ class WatchShape extends StatefulWidget {
 }
 
 class _WatchShapeState extends State<WatchShape> {
-  WearShape _shape;
+  // Default to round until the platform returns the shape
+  // round being the most common form factor for WearOS
+  WearShape _shape = WearShape.round;
 
   @override
   void initState() {
     super.initState();
-    // Default to round until the platform returns the shape
-    // round being the most common form factor for WearOS
-    _shape = WearShape.round;
     Wear.instance.getShape().then((String shape) {
       if (mounted) {
         setState(() => _shape = (shape == 'round' ? WearShape.round : WearShape.square));
@@ -54,11 +51,7 @@ class _WatchShapeState extends State<WatchShape> {
       shape: _shape,
       child: Builder(
         builder: (BuildContext context) {
-          if (widget.builder != null) {
-            return widget.builder(context, _shape, widget.child);
-          } else {
-            return widget.child;
-          }
+          return widget.builder(context, _shape);
         },
       ),
     );
@@ -69,16 +62,14 @@ class _WatchShapeState extends State<WatchShape> {
 @Deprecated("Add WatchShape instead and use WatchShape.of(context) to get the shape value.")
 class InheritedShape extends InheritedWidget {
   const InheritedShape({
-    Key key,
-    @required this.shape,
-    @required Widget child,
-  })  : assert(shape != null),
-        assert(child != null),
-        super(key: key, child: child);
+    Key? key,
+    required this.shape,
+    required Widget child,
+  })  : super(key: key, child: child);
 
   final WearShape shape;
 
-  static InheritedShape of(BuildContext context) {
+  static InheritedShape? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<InheritedShape>();
   }
 
