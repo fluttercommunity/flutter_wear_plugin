@@ -28,7 +28,7 @@ class Wear {
     switch (call.method) {
       case 'onEnterAmbient':
         final args = (call.arguments as Map).cast<String, bool>();
-        final details = AmbientDetails(args['burnInProtection'], args['lowBitAmbient']);
+        final details = AmbientDetails(args['burnInProtection']!, args['lowBitAmbient']!);
         _notifyAmbientCallbacks((callback) => callback.onEnterAmbient(details));
         break;
       case 'onExitAmbient':
@@ -57,7 +57,7 @@ class Wear {
   /// Fetches the shape of the watch face
   Future<String> getShape() async {
     try {
-      return await _channel.invokeMethod<String>('getShape');
+      return (await _channel.invokeMethod<String>('getShape'))!;
     } on PlatformException catch (e, st) {
       // Default to round
       debugPrint('Error calling getShape: $e\n$st');
@@ -68,7 +68,7 @@ class Wear {
   /// Tells the application if we are currently in ambient mode
   Future<bool> isAmbient() async {
     try {
-      return await _channel.invokeMethod<bool>('isAmbient');
+      return (await _channel.invokeMethod<bool>('isAmbient'))!;
     } on PlatformException catch (e, st) {
       debugPrint('Error calling isAmbient: $e\n$st');
       return false;
