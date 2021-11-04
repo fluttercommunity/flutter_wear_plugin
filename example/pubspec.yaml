@@ -3,13 +3,14 @@ description: Demonstrates how to use the wear plugin.
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
 dependencies:
   wear:
     path: ../
   flutter:
     sdk: flutter
+  dotup_flutter_widgets: ^3.0.1
 
 dev_dependencies:
   flutter_test:

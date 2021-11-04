@@ -1,3 +1,8 @@
+https://medium.com/flutter-community/flutter-building-wearos-app-fedf0f06d1b4
+
+
+
+
 # Flutter Wear Plugin
 
 A plugin that offers Flutter support for Wear OS by Google (Android Wear).

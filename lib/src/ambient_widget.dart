@@ -5,7 +5,7 @@ import 'package:wear/src/wear.dart';
 enum WearMode { active, ambient }
 
 /// Builds a child for [AmbientMode]
-typedef Widget AmbientModeWidgetBuilder(BuildContext context, WearMode mode, Widget child);
+typedef Widget AmbientModeWidgetBuilder(BuildContext context, WearMode mode, Widget? child);
 
 /// Widget that listens for when a Wear device enters full power or ambient mode,
 /// and provides this in a builder. It optionally takes an [onUpdate] function that's
@@ -13,26 +13,29 @@ typedef Widget AmbientModeWidgetBuilder(BuildContext context, WearMode mode, Wid
 @immutable
 class AmbientMode extends StatefulWidget {
   const AmbientMode({
-    Key key,
-    this.builder,
-    this.child,
+    Key? key,
+    AmbientModeWidgetBuilder? builder,
+    Widget? child,
     this.onUpdate,
-  })  : super(key: key);
+  })  : assert(builder != null || child != null),
+        this.builder = builder,
+        this.child = child,
+        super(key: key);
 
-  final AmbientModeWidgetBuilder builder;
-  final Widget child;
+  final AmbientModeWidgetBuilder? builder;
+  final Widget? child;
 
   /// Called each time the the wear device triggers an ambient update request.
-  final VoidCallback onUpdate;
+  final VoidCallback? onUpdate;
 
   /// Get current [WearMode].
   static WearMode wearModeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>().mode;
+    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!.mode;
   }
 
   /// Get current [AmbientDetails].
   static AmbientDetails ambientDetailsOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>().details;
+    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!.details;
   }
 
   @override
@@ -63,10 +66,10 @@ class _AmbientModeState extends State<AmbientMode> with AmbientCallback {
       details: _ambientDetails,
       child: Builder(
         builder: (BuildContext context) {
-          if (widget.builder != null) {
-            return widget.builder(context, _ambientMode, widget.child);
+          if (widget.builder == null) {
+            return widget.child!;
           } else {
-            return widget.child;
+            return widget.builder!(context, _ambientMode, widget.child);
           }
         },
       ),
@@ -94,14 +97,11 @@ class _AmbientModeState extends State<AmbientMode> with AmbientCallback {
 
 class _InheritedAmbientMode extends InheritedWidget {
   const _InheritedAmbientMode({
-    Key key,
-    @required this.mode,
-    @required this.details,
-    @required Widget child,
-  })  : assert(mode != null),
-        assert(mode != null),
-        assert(child != null),
-        super(key: key, child: child);
+    Key? key,
+    required this.mode,
+    required this.details,
+    required Widget child,
+  }) : super(key: key, child: child);
 
   final WearMode mode;
   final AmbientDetails details;
