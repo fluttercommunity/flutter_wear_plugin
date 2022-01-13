@@ -6,6 +6,9 @@
 build/
 .packages
 pubspec.lock
+*.iml
 
 # iOS not required for this plugin
 ios/**
+windows/**
+macos/**

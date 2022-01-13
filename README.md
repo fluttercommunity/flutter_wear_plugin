@@ -5,6 +5,11 @@ A plugin that offers Flutter support for Wear OS by Google (Android Wear).
 __To use this plugin you must set your `minSdkVersion` to `23`.__
 
 
+# Tutorial
+
+https://medium.com/flutter-community/flutter-building-wearos-app-fedf0f06d1b4
+
+
 # Widgets
 
 There currently three widgets provided by the plugin:
@@ -15,14 +20,14 @@ There currently three widgets provided by the plugin:
 
 ## Example
 
-Typically all three of these widgets would be used near the root of your app's widget tree:
+Typically, all three of these widgets would be used near the root of your app's widget tree:
 
 ```dart
 class WatchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WatchShape(
-      builder: (context, shape, child) {
+      builder: (BuildContext context, WearShape shape, Widget? child) {
         return AmbientMode(
           builder: (context, mode, child) {
             return mode == Mode.active ? ActiveWatchFace() : AmbientWatchFace();
@@ -30,7 +35,7 @@ class WatchScreen extends StatelessWidget {
         );
       },
     );
-  },
+  }
 }
 ```
 

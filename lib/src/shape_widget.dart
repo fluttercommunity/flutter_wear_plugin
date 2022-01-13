@@ -1,24 +1,23 @@
 import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart';
 import 'package:wear/src/wear.dart';
 
 /// Shape of a Wear device
 enum WearShape { square, round }
 
 /// Builds a child for a [WatchShape]
-typedef Widget WatchShapeBuilder(BuildContext context, WearShape shape, Widget child);
+typedef Widget WatchShapeBuilder(BuildContext context, WearShape shape, Widget? child);
 
 /// Builder widget for watch shapes
 @immutable
 class WatchShape extends StatefulWidget {
   const WatchShape({
-    Key key,
-    this.builder,
+    Key? key,
+    required this.builder,
     this.child,
-  })  : super(key: key);
+  }) : super(key: key);
 
   final WatchShapeBuilder builder;
-  final Widget child;
+  final Widget? child;
 
   /// Call [WatchShape.of(context)] to retrieve the shape further down
   /// in the widget hierarchy.
@@ -32,7 +31,7 @@ class WatchShape extends StatefulWidget {
 }
 
 class _WatchShapeState extends State<WatchShape> {
-  WearShape _shape;
+  late WearShape _shape;
 
   @override
   void initState() {
@@ -54,11 +53,7 @@ class _WatchShapeState extends State<WatchShape> {
       shape: _shape,
       child: Builder(
         builder: (BuildContext context) {
-          if (widget.builder != null) {
-            return widget.builder(context, _shape, widget.child);
-          } else {
-            return widget.child;
-          }
+          return widget.builder(context, _shape, widget.child);
         },
       ),
     );
@@ -69,17 +64,15 @@ class _WatchShapeState extends State<WatchShape> {
 @Deprecated("Add WatchShape instead and use WatchShape.of(context) to get the shape value.")
 class InheritedShape extends InheritedWidget {
   const InheritedShape({
-    Key key,
-    @required this.shape,
-    @required Widget child,
-  })  : assert(shape != null),
-        assert(child != null),
-        super(key: key, child: child);
+    Key? key,
+    required this.shape,
+    required Widget child,
+  }) : super(key: key, child: child);
 
   final WearShape shape;
 
   static InheritedShape of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<InheritedShape>();
+    return context.dependOnInheritedWidgetOfExactType<InheritedShape>()!;
   }
 
   @override
