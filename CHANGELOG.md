@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Fix issue with non-windows builds breaking.
+
 # 1.0.0
 
 - Null Safety Migration (Finally!)
