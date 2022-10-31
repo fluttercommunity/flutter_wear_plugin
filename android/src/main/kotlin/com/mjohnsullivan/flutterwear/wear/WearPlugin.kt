@@ -1,7 +1,6 @@
 package com.mjohnsullivan.flutterwear.wear
 
 import android.os.Bundle
-import androidx.core.view.ViewCompat.getRootWindowInsets
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
