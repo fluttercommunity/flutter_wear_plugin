@@ -5,7 +5,8 @@ import 'package:wear/src/wear.dart';
 enum WearMode { active, ambient }
 
 /// Builds a child for [AmbientMode]
-typedef Widget AmbientModeWidgetBuilder(BuildContext context, WearMode mode, Widget? child);
+typedef Widget AmbientModeWidgetBuilder(
+    BuildContext context, WearMode mode, Widget? child);
 
 /// Widget that listens for when a Wear device enters full power or ambient mode,
 /// and provides this in a builder. It optionally takes an [onUpdate] function that's
@@ -27,12 +28,16 @@ class AmbientMode extends StatefulWidget {
 
   /// Get current [WearMode].
   static WearMode wearModeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!.mode;
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!
+        .mode;
   }
 
   /// Get current [AmbientDetails].
   static AmbientDetails ambientDetailsOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!.details;
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedAmbientMode>()!
+        .details;
   }
 
   @override
@@ -71,7 +76,8 @@ class _AmbientModeState extends State<AmbientMode> with AmbientCallback {
 
   void _updateMode(bool isAmbient) {
     if (mounted) {
-      setState(() => _ambientMode = isAmbient ? WearMode.ambient : WearMode.active);
+      setState(
+          () => _ambientMode = isAmbient ? WearMode.ambient : WearMode.active);
     }
   }
 
