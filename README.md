@@ -18,6 +18,19 @@ There currently three widgets provided by the plugin:
 * AmbientMode: builder that provides what mode the watch is in. The widget will rebuild whenever the watch changes mode.
 
 
+## Setup
+
+If you are creating a standalone watch app, add the following to your manifest:
+
+```xml
+<application>
+  <meta-data
+    android:name="com.google.android.wearable.standalone"
+    android:value="true"
+    />
+</application>
+```
+
 ## Example
 
 Typically, all three of these widgets would be used near the root of your app's widget tree:
@@ -48,8 +61,7 @@ automatically adds all required references and settings.
 
 1. `build.gradle`: _wearable dependencies_
 
-2. `AndroidManifest.xml`: _`WAKE_LOCK` and `android.hardware.type.watch`
-   and `com.google.android.wearable.standalone`._
-
+2. `AndroidManifest.xml`: _`WAKE_LOCK` and `android.hardware.type.watch`_
+   
 3. `MainActivity.kt` or `MainActivity.java`: _all `AmbientMode` references._
 
