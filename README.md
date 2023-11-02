@@ -30,7 +30,7 @@ class WatchScreen extends StatelessWidget {
       builder: (BuildContext context, WearShape shape, Widget? child) {
         return AmbientMode(
           builder: (context, mode, child) {
-            return mode == Mode.active ? ActiveWatchFace() : AmbientWatchFace();
+            return mode == WearMode.active ? ActiveWatchFace() : AmbientWatchFace();
           },
         );
       },
